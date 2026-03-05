@@ -3,7 +3,9 @@
    =================================================== */
 
 /* ---------- Reset & Base ---------- */
-*, *::before, *::after {
+*,
+*::before,
+*::after {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
@@ -83,16 +85,33 @@ body {
 }
 
 @keyframes blobDrift1 {
-    0%   { transform: translate(0, 0) scale(1); }
-    100% { transform: translate(80px, 60px) scale(1.15); }
+    0% {
+        transform: translate(0, 0) scale(1);
+    }
+
+    100% {
+        transform: translate(80px, 60px) scale(1.15);
+    }
 }
+
 @keyframes blobDrift2 {
-    0%   { transform: translate(0, 0) scale(1); }
-    100% { transform: translate(-60px, -50px) scale(1.2); }
+    0% {
+        transform: translate(0, 0) scale(1);
+    }
+
+    100% {
+        transform: translate(-60px, -50px) scale(1.2);
+    }
 }
+
 @keyframes blobDrift3 {
-    0%   { transform: translate(-50%, -50%) scale(1); }
-    100% { transform: translate(-40%, -55%) scale(1.1); }
+    0% {
+        transform: translate(-50%, -50%) scale(1);
+    }
+
+    100% {
+        transform: translate(-40%, -55%) scale(1.1);
+    }
 }
 
 /* ---------- Layout ---------- */
@@ -124,8 +143,15 @@ body {
 }
 
 @keyframes pulse {
-    0%, 100% { transform: scale(1); }
-    50%      { transform: scale(1.12); }
+
+    0%,
+    100% {
+        transform: scale(1);
+    }
+
+    50% {
+        transform: scale(1.12);
+    }
 }
 
 .header h1 {
@@ -278,14 +304,16 @@ select option {
     width: 22px;
     height: 22px;
     margin: -11px 0 0 -11px;
-    border: 3px solid rgba(255,255,255,0.3);
+    border: 3px solid rgba(255, 255, 255, 0.3);
     border-top-color: #fff;
     border-radius: 50%;
     animation: spin 0.7s linear infinite;
 }
 
 @keyframes spin {
-    to { transform: rotate(360deg); }
+    to {
+        transform: rotate(360deg);
+    }
 }
 
 /* ---------- Error ---------- */
@@ -320,6 +348,7 @@ select option {
         opacity: 0;
         transform: translateY(24px);
     }
+
     to {
         opacity: 1;
         transform: translateY(0);
@@ -327,8 +356,13 @@ select option {
 }
 
 @keyframes fadeIn {
-    from { opacity: 0; }
-    to   { opacity: 1; }
+    from {
+        opacity: 0;
+    }
+
+    to {
+        opacity: 1;
+    }
 }
 
 /* Verdict Banner */
@@ -382,7 +416,7 @@ select option {
 
 .stat-card:hover {
     transform: translateY(-3px);
-    box-shadow: 0 8px 24px rgba(0,0,0,0.2);
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.2);
 }
 
 .stat-card.highlight {
@@ -429,7 +463,7 @@ select option {
     padding: 8px 0;
 }
 
-.hypothesis-row + .hypothesis-row {
+.hypothesis-row+.hypothesis-row {
     border-top: 1px solid var(--glass-border);
 }
 
@@ -443,6 +477,188 @@ select option {
 .hyp-text {
     font-size: 1rem;
     color: var(--text);
+}
+
+/* ---------- History Section ---------- */
+.history-section {
+    margin-top: 36px;
+}
+
+.history-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 18px;
+}
+
+.history-header h2 {
+    font-size: 1.2rem;
+    font-weight: 700;
+    color: #fff;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.history-icon {
+    font-size: 1.3rem;
+}
+
+.history-count {
+    font-size: 0.8rem;
+    font-weight: 600;
+    color: var(--accent-light);
+    background: rgba(108, 99, 255, 0.15);
+    padding: 4px 12px;
+    border-radius: 20px;
+    letter-spacing: 0.3px;
+}
+
+.history-empty {
+    text-align: center;
+    color: var(--text-muted);
+    font-size: 0.9rem;
+    padding: 32px 16px;
+    background: var(--glass);
+    border: 1px dashed var(--glass-border);
+    border-radius: var(--radius);
+}
+
+.history-list {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.history-item {
+    background: var(--glass);
+    border: 1px solid var(--glass-border);
+    border-radius: var(--radius-sm);
+    padding: 16px 20px;
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+    transition: transform var(--transition), box-shadow var(--transition);
+    animation: historySlideIn 0.35s ease both;
+}
+
+.history-item:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 24px rgba(0, 0, 0, 0.2);
+}
+
+@keyframes historySlideIn {
+    from {
+        opacity: 0;
+        transform: translateY(12px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.history-item-top {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 12px;
+}
+
+.history-meta {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    flex-wrap: wrap;
+}
+
+.history-date {
+    font-size: 0.78rem;
+    color: var(--text-muted);
+    font-weight: 500;
+}
+
+.history-badge {
+    font-size: 0.7rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    padding: 3px 10px;
+    border-radius: 12px;
+}
+
+.history-badge.reject {
+    background: var(--red-glow);
+    color: #fca5a5;
+    border: 1px solid rgba(239, 68, 68, 0.25);
+}
+
+.history-badge.accept {
+    background: var(--green-glow);
+    color: #86efac;
+    border: 1px solid rgba(34, 197, 94, 0.25);
+}
+
+.history-tail {
+    font-size: 0.72rem;
+    font-weight: 600;
+    color: var(--text-muted);
+    background: var(--surface);
+    padding: 3px 8px;
+    border-radius: 8px;
+}
+
+.history-delete {
+    background: none;
+    border: 1px solid transparent;
+    color: var(--text-muted);
+    font-size: 0.85rem;
+    cursor: pointer;
+    width: 28px;
+    height: 28px;
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all var(--transition);
+    flex-shrink: 0;
+}
+
+.history-delete:hover {
+    color: var(--red);
+    background: var(--red-glow);
+    border-color: rgba(239, 68, 68, 0.25);
+}
+
+.history-stats {
+    display: grid;
+    grid-template-columns: repeat(6, 1fr);
+    gap: 8px;
+}
+
+.history-stat {
+    text-align: center;
+    padding: 8px 4px;
+    background: var(--surface);
+    border-radius: 8px;
+}
+
+.history-stat span {
+    display: block;
+    font-size: 0.65rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    color: var(--text-muted);
+    margin-bottom: 4px;
+    letter-spacing: 0.3px;
+}
+
+.history-stat strong {
+    display: block;
+    font-size: 0.85rem;
+    font-weight: 700;
+    color: #fff;
+    word-break: break-all;
 }
 
 /* ---------- Footer ---------- */
@@ -474,6 +690,10 @@ select option {
 
     .stats-grid {
         grid-template-columns: repeat(2, 1fr);
+    }
+
+    .history-stats {
+        grid-template-columns: repeat(3, 1fr);
     }
 
     .card {
