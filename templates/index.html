@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>One-Sample T-Test Calculator</title>
+    <meta name="description" content="Perform a one-sample t-test with descriptive statistics, p-value, confidence intervals, and hypothesis decision. Beautiful, fast, and free.">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+
+<!-- Animated background blobs -->
+<div class="bg-blob blob-1"></div>
+<div class="bg-blob blob-2"></div>
+<div class="bg-blob blob-3"></div>
+
+<div class="container">
+    <!-- Header -->
+    <header class="header">
+        <div class="logo">
+            <span class="logo-icon">📊</span>
+            <h1>One-Sample <span class="accent">T-Test</span></h1>
+        </div>
+        <p class="subtitle">Enter your data and test whether the sample mean significantly differs from a known population mean.</p>
+    </header>
+
+    <!-- Main Card -->
+    <main class="card" id="main-card">
+        <form id="ttest-form" autocomplete="off">
+            <!-- Sample Data -->
+            <div class="form-group">
+                <label for="sample-data">
+                    <span class="label-icon">🔢</span> Sample Data
+                    <span class="label-hint">(comma, space, or newline separated)</span>
+                </label>
+                <textarea id="sample-data" name="sample_data" rows="4" placeholder="e.g. 23, 25, 28, 22, 27, 30, 24, 26, 29, 21" required></textarea>
+            </div>
+
+            <!-- Parameters Row -->
+            <div class="params-row">
+                <div class="form-group">
+                    <label for="pop-mean">
+                        <span class="label-icon">μ₀</span> Population Mean (H₀)
+                    </label>
+                    <input type="number" id="pop-mean" name="population_mean" step="any" value="0" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="alpha">
+                        <span class="label-icon">α</span> Significance Level
+                    </label>
+                    <select id="alpha" name="alpha">
+                        <option value="0.01">0.01</option>
+                        <option value="0.05" selected>0.05</option>
+                        <option value="0.10">0.10</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label for="tail">
+                        <span class="label-icon">↔</span> Test Type
+                    </label>
+                    <select id="tail" name="tail">
+                        <option value="two" selected>Two-Tailed</option>
+                        <option value="left">Left-Tailed</option>
+                        <option value="right">Right-Tailed</option>
+                    </select>
+                </div>
+            </div>
+
+            <!-- Submit Button -->
+            <button type="submit" class="btn-primary" id="submit-btn">
+                <span class="btn-text">Run T-Test</span>
+                <span class="btn-loader" id="btn-loader"></span>
+            </button>
+        </form>
+
+        <!-- Error Message -->
+        <div class="error-msg" id="error-msg"></div>
+    </main>
+
+    <!-- Results Section -->
+    <section class="results-section hidden" id="results-section">
+        <!-- Verdict Banner -->
+        <div class="verdict-banner" id="verdict-banner">
+            <div class="verdict-icon" id="verdict-icon"></div>
+            <p class="verdict-text" id="verdict-text"></p>
+        </div>
+
+        <!-- Stats Grid -->
+        <div class="stats-grid">
+            <div class="stat-card" id="stat-n">
+                <span class="stat-label">Sample Size (n)</span>
+                <span class="stat-value" id="val-n">—</span>
+            </div>
+            <div class="stat-card" id="stat-mean">
+                <span class="stat-label">Sample Mean (x̄)</span>
+                <span class="stat-value" id="val-mean">—</span>
+            </div>
+            <div class="stat-card" id="stat-std">
+                <span class="stat-label">Std. Deviation (s)</span>
+                <span class="stat-value" id="val-std">—</span>
+            </div>
+            <div class="stat-card" id="stat-se">
+                <span class="stat-label">Standard Error</span>
+                <span class="stat-value" id="val-se">—</span>
+            </div>
+            <div class="stat-card highlight" id="stat-t">
+                <span class="stat-label">T-Statistic</span>
+                <span class="stat-value" id="val-t">—</span>
+            </div>
+            <div class="stat-card highlight" id="stat-p">
+                <span class="stat-label">P-Value</span>
+                <span class="stat-value" id="val-p">—</span>
+            </div>
+            <div class="stat-card" id="stat-df">
+                <span class="stat-label">Degrees of Freedom</span>
+                <span class="stat-value" id="val-df">—</span>
+            </div>
+            <div class="stat-card" id="stat-ci">
+                <span class="stat-label">Confidence Interval</span>
+                <span class="stat-value" id="val-ci">—</span>
+            </div>
+        </div>
+
+        <!-- Hypotheses -->
+        <div class="card hypotheses-card">
+            <h3>Hypotheses</h3>
+            <div class="hypothesis-row">
+                <span class="hyp-label">H₀:</span>
+                <span class="hyp-text" id="hyp-null">μ = μ₀</span>
+            </div>
+            <div class="hypothesis-row">
+                <span class="hyp-label">H₁:</span>
+                <span class="hyp-text" id="hyp-alt">μ ≠ μ₀</span>
+            </div>
+        </div>
+    </section>
+
+    <footer class="footer">
+        <p>Built with Flask &amp; SciPy · One-Sample T-Test Calculator</p>
+    </footer>
+</div>
+
+<script src="{{ url_for('static', filename='script.js') }}"></script>
+</body>
+</html>
